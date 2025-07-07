@@ -17,6 +17,14 @@
                     </x-nav-link>
                 </div>
             </div>
+            @if(Auth::check() && Auth::user()->role === 'admin')
+    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+        <x-nav-link href="/admin/dashboard">
+            Admin Dashboard
+        </x-nav-link>
+    </div>
+@endif
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -71,6 +79,18 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+        <div class="pt-2 pb-3 space-y-1">
+    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        {{ __('Dashboard') }}
+    </x-responsive-nav-link>
+
+    @if(Auth::check() && Auth::user()->role === 'admin')
+        <x-responsive-nav-link href="/admin/dashboard">
+            Admin Dashboard
+        </x-responsive-nav-link>
+    @endif
+</div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
